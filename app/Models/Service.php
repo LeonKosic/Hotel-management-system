@@ -15,4 +15,7 @@ class Service extends Model
     public function rooms() {
         return $this->belongsToMany(Room::class);
     }
+    public function reservations() {
+        return $this->belongsToMany(Reservation::class);
+    }
 }
