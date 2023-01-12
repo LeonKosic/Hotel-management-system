@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedSmallInteger('type')->default(0);//0- korisnik, 1- admin sistema, 2- admin resursa
             $table->boolean("isActive")->default(false);
-            $table->boolean("resetRequired")->default(false);
+            $table->smallInteger("loginCount")->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
