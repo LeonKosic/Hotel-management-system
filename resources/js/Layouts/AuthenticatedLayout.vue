@@ -33,6 +33,20 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </NavLink>
                             </div>
+                            <div v-if="$page.props.auth.user.type==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href='/rooms' :active="route().current('rooms')">
+                                    Sobe
+                                </NavLink>
+                            </div>
+                            <div v-if="$page.props.auth.user.type==2" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href='/rooms' :active="route().current('rooms')">
+                                    Korisnici
+                                </NavLink>
+                            </div><div v-if="$page.props.auth.user.type==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href='/rooms' :active="route().current('rooms')">
+                                    Servisi
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
