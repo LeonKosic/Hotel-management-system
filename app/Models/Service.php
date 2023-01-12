@@ -10,7 +10,9 @@ class Service extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'active',
         'price',
+        'description'
     ];
     public function rooms() {
         return $this->belongsToMany(Room::class);

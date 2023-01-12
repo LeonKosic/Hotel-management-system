@@ -13,6 +13,7 @@ class Reservation extends Model
         'description',
         'user_id',
         'room_id',
+        'active',
         'reservation_start',
         'reservation_end',
     ];

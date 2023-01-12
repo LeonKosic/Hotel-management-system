@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('room_id')->constrained();
             $table->timestamp("reservation_start");
             $table->timestamp("reservation_end");
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
