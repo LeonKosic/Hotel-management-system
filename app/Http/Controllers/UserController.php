@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Reservation;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
+use Inertia\Response;
 class UserController extends Controller
 {
     /**
@@ -13,9 +15,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : Response
     {
-        //
+        return Inertia::render('Admin/Users', [
+            'admin' => request()->user(),
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -23,7 +28,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() :RedirectResponse
     {
         //
     }
@@ -45,9 +50,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user) : Response
     {
-        //
+        $user->load('reservations');
+        return Inertia::render('Element/User', [
+            'admin' => request()->user(),
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -56,7 +65,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id) : Response
     {
         //
     }
@@ -68,7 +77,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) : RedirectResponse
     {
         //
     }
@@ -79,8 +88,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( User $user) : RedirectResponse
     {
-        //
+        $user->active=0;
+        $user->save();
+        return redirect('/users');
     }
 }

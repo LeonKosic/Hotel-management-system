@@ -39,12 +39,12 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                             <div v-if="$page.props.auth.user.type==2" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href='/users' :active="route().current('/rooms')">
+                                <NavLink href='/users' :active="route().current('/users')">
                                     Korisnici
                                 </NavLink>
                             </div><div v-if="$page.props.auth.user.type==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href='/services' :active="route().current('/services')">
-                                    Servisi
+                                    Usluge
                                 </NavLink>
                             </div>
                         </div>

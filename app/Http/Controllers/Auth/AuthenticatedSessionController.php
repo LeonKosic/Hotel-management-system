@@ -36,11 +36,14 @@ class AuthenticatedSessionController extends Controller
         if ($user->loginCount >= env('NUM_LOGIN', 5)){ 
             $request->session()->invalidate();
             return redirect()->route('password.request');
+        }else if(!$user->active){
+            $request->session()->invalidate();
+            return redirect('/');
         }else{
             $user->loginCount++;
             $user->save();
             $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->route(RouteServiceProvider::HOME);
         }
     }
 
