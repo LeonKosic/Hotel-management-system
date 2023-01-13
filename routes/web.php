@@ -29,9 +29,15 @@ Route::get('/', function () {
 Route::get('/dashboard', [RoomController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/rooms', [RoomController::class, 'index']);
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
+    Route::get('/services/{service}', [ServiceController::class, 'show']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/rooms/{room}', [RoomController::class, 'update']);
+    Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
+    Route::patch('/services/{service}', [ServiceController::class, 'update']);
+    Route::delete('/services/{service}', [ProfileController::class, 'destroy']);
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -25,6 +26,16 @@ class RoomController extends Controller
         ]);
     }
     public function show(Room $room){
-        return request()->user() -> name;   
+        $room->load('services');
+        return Inertia::render("Element/Room", [
+            'user'=> request()->user(),
+            'room'=> $room,
+        ]);   
+    }
+
+    public function destroy(Room $room):RedirectResponse{
+        $room->active = 0;
+        $room->save();   
+        return redirect()->route('/rooms');
     }
 }
