@@ -24,8 +24,8 @@ const submit = () => {
         <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset
-            link that will allow you to choose a new one.
+            Zaboravili ste Vašu lozinku? Ne problema. Ostavite svoju e-mail adresu i poslaćemo Vam vezu za resetovanje lozinke 
+            koja će Vam omogućiti da izaberete novu.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
