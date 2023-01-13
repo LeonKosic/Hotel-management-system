@@ -31,21 +31,24 @@ Route::get('/', function () {
 Route::get('/dashboard', [RoomController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/rooms', [RoomController::class, 'index']);
-    Route::get('/rooms/{room}', [RoomController::class, 'show']);
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/rooms/{room}', [RoomController::class, 'show']);
     Route::get('/users/{user}', [UserController::class, 'show']);
     Route::get('/services/{service}', [ServiceController::class, 'show']);
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/rooms/{room}', [RoomController::class, 'update']);
     Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
     Route::patch('/services/{service}', [ServiceController::class, 'update']);
-    Route::delete('/services/{service}', [ProfileController::class, 'destroy']);
+    Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
     Route::patch('/users/{user}', [ UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/rooms/{room}/edit', [ RoomController::class, 'edit']);
+    Route::patch('/users/{user}/edit', [ UserController::class, 'edit']);
+    Route::delete('/services/{service}/edit', [ServiceController::class, 'edit']);
 });
 
 require __DIR__.'/auth.php';
