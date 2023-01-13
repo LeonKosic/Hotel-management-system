@@ -19,7 +19,7 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Confirm Password" />
+        <Head title="Confirm Password"/>
 
         <div class="mb-4 text-sm text-gray-600">
             Ovo je bezbjedna oblast aplikacije. Molimo Vas da potvrdite svoju lozinku prije nego što nastavite.
