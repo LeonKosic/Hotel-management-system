@@ -46,9 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
     Route::patch('/users/{user}', [ UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
-    Route::patch('/rooms/{room}/edit', [ RoomController::class, 'edit']);
-    Route::patch('/users/{user}/edit', [ UserController::class, 'edit']);
-    Route::delete('/services/{service}/edit', [ServiceController::class, 'edit']);
+    Route::get('/rooms/{room}/edit', [ RoomController::class, 'edit']);
+    Route::get('/users/{user}/edit', [ UserController::class, 'edit']);
+    Route::get('/services/{service}/edit', [ServiceController::class, 'edit']);
 });
 
 require __DIR__.'/auth.php';

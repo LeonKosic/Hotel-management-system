@@ -32,6 +32,13 @@ class RoomController extends Controller
             'room'=> $room,
         ]);   
     }
+    public function edit(Room $room){
+        $room->load('services');
+        return Inertia::render("Element/Edit/Room", [
+            'user'=> request()->user(),
+            'room'=> $room,
+        ]);   
+    }
 
     public function destroy(Room $room):RedirectResponse{
         $room->active = 0;
