@@ -17,9 +17,11 @@ class UserController extends Controller
      */
     public function index() : Response
     {
+        
+        $users=(collect(User::all())->sortByDesc('created_at'))->values()->all();
         return Inertia::render('Admin/Users', [
             'admin' => request()->user(),
-            'users' => User::all(),
+            'users' => $users,
         ]);
     }
 
@@ -65,9 +67,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) : Response
+    public function edit(User $user) : Response
     {
-        //
+        return Inertia::render('Element/Edit/User', [
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -90,7 +94,7 @@ class UserController extends Controller
      */
     public function destroy( User $user) : RedirectResponse
     {
-        $user->active=0;
+        $user->active=!$user->active;
         $user->save();
         return redirect('/users');
     }

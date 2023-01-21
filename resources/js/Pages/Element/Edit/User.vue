@@ -1,31 +1,35 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { Head ,useForm, Link} from '@inertiajs/inertia-vue3'
 
 defineProps({
-    user:Object,
-    room:Object,
-});
+    admin:Object,
+    user :Object,
+})
+
+
 </script>
-
 <template>
-    <Head title="Iznajmljivanje jedinica" />
-
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Iznajmljivanje stambenih jedinica</h2>
-        </template>
-        <ul class="pl-[33%] w-[100%] items-center list-none list-inside self-center">
-            <li v-for="room in rooms" class="py-4">
-            <Link  method="get" :href='"/rooms/"+room.id' class="block w-[50%] p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ room.name }}</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">{{ room.description }}</p>
-            <p class="font-semibold text-lg  text-green-600 dark:text-green-600">{{ room.price }}KM</p>
-           </Link>
-         </li>
-        </ul>
-        
-                
-           
+    <Head title="Izmjena sobe" />
+    <AuthenticatedLayout >
+        <div class="ml-[33%] mr-[33%] max-w items-center list-none list-inside self-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm font-medium text-white ">Naziv sobe:</label>
+                <input id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="user.name" />
+            </div>
+            <div class="mb-6">
+                <label for="price"  class="block mb-2 text-sm font-medium  text-white ">Cijena sobe:</label>
+                <input id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="user.price" />
+            </div>
+            <div class="mb-6">
+                <label for="description" class="block mb-2 text-sm font-medium  text-white ">Opis sobe:</label>
+                <input id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="user.description" />
+            </div>
+            <div class="mb-6">
+                <Link :href="'/users/'+user.id" class="text-white pl-[40%]" method="POST" as="button" :data="{user}">Sačuvaj</Link>
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>
+

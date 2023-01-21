@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->double('amount');
+            $table->string('name');
             $table->timestamps();
         });
     }

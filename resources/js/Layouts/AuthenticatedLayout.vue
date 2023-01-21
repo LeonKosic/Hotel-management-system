@@ -33,6 +33,11 @@ const showingNavigationDropdown = ref(false);
                                     Početna
                                 </NavLink>
                             </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('reservations')" :active="route().current('reservations')">
+                                    Rezervacije
+                                </NavLink>
+                            </div>
                             <div v-if="$page.props.auth.user.type==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href='/rooms' :active="route().current('/rooms')">
                                     Sobe

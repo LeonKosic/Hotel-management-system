@@ -1,63 +1,35 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
 
-const props = defineProps({
-    service: Object
-});
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import { Head , useForm, Link} from '@inertiajs/inertia-vue3'
 
-const user = usePage().props.value.auth.user;
+defineProps({
+    admin:Object,
+    service :Object,
+})
 
-const form = useForm({
-    name: user.name,
-    email: user.email,
-});
+
 </script>
-
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
-
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="name" value="Name" />
-
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
+    <Head title="Izmjena sobe" />
+    <AuthenticatedLayout >
+        <div class="ml-[33%] mr-[33%] max-w items-center list-none list-inside self-center bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm font-medium text-white ">Naziv usluge:</label>
+                <input id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="service.name" />
             </div>
-
-            <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="email"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
+            <div class="mb-6">
+                <label for="price"  class="block mb-2 text-sm font-medium  text-white ">Cijena usluge:</label>
+                <input id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="service.price" />
             </div>
-        </form>
-    </section>
+            <div class="mb-6">
+                <label for="description" class="block mb-2 text-sm font-medium  text-white ">Opis usluge:</label>
+                <input id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="service.description" />
+            </div>
+            <div class="mb-6">
+                <Link :href="'/services/'+service.id" class="text-white pl-[40%]" method="POST" as="button" :data="{service}">Sačuvaj</Link>
+            </div>
+        </div>
+    </AuthenticatedLayout>
 </template>
+

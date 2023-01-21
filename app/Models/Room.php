@@ -18,6 +18,6 @@ class Room extends Model
         return $this->belongsToMany(Service::class);
     }
     public function reservations() {
-        return $this->belongsToMany(Reservation::class);
+        return $this->hasMany(Reservation::class);
     }
 }
